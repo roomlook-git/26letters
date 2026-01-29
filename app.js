@@ -3,27 +3,27 @@ const LETTERS = [
   { symbol: "B", ipaName: "/biː/", ipaSound: "/b/" },
   { symbol: "C", ipaName: "/siː/", ipaSound: "/k/" },
   { symbol: "D", ipaName: "/diː/", ipaSound: "/d/" },
-  { symbol: "E", ipaName: "/iː/", ipaSound: "/ɛ/" },
-  { symbol: "F", ipaName: "/ɛf/", ipaSound: "/f/" },
+  { symbol: "E", ipaName: "/iː/", ipaSound: "/e/" },
+  { symbol: "F", ipaName: "/ef/", ipaSound: "/f/" },
   { symbol: "G", ipaName: "/dʒiː/", ipaSound: "/ɡ/" },
   { symbol: "H", ipaName: "/eɪtʃ/", ipaSound: "/h/" },
   { symbol: "I", ipaName: "/aɪ/", ipaSound: "/ɪ/" },
   { symbol: "J", ipaName: "/dʒeɪ/", ipaSound: "/dʒ/" },
   { symbol: "K", ipaName: "/keɪ/", ipaSound: "/k/" },
-  { symbol: "L", ipaName: "/ɛl/", ipaSound: "/l/" },
-  { symbol: "M", ipaName: "/ɛm/", ipaSound: "/m/" },
-  { symbol: "N", ipaName: "/ɛn/", ipaSound: "/n/" },
+  { symbol: "L", ipaName: "/el/", ipaSound: "/l/" },
+  { symbol: "M", ipaName: "/em/", ipaSound: "/m/" },
+  { symbol: "N", ipaName: "/en/", ipaSound: "/n/" },
   { symbol: "O", ipaName: "/oʊ/", ipaSound: "/ɑ/" },
   { symbol: "P", ipaName: "/piː/", ipaSound: "/p/" },
   { symbol: "Q", ipaName: "/kjuː/", ipaSound: "/kw/" },
-  { symbol: "R", ipaName: "/ɑr/", ipaSound: "/r/" },
-  { symbol: "S", ipaName: "/ɛs/", ipaSound: "/s/" },
+  { symbol: "R", ipaName: "/ɑːr/", ipaSound: "/r/" },
+  { symbol: "S", ipaName: "/es/", ipaSound: "/s/" },
   { symbol: "T", ipaName: "/tiː/", ipaSound: "/t/" },
   { symbol: "U", ipaName: "/juː/", ipaSound: "/ʌ/" },
   { symbol: "V", ipaName: "/viː/", ipaSound: "/v/" },
   { symbol: "W", ipaName: "/ˈdʌbəl.juː/", ipaSound: "/w/" },
-  { symbol: "X", ipaName: "/ɛks/", ipaSound: "/ks/" },
-  { symbol: "Y", ipaName: "/waɪ/", ipaSound: "/j/" },
+  { symbol: "X", ipaName: "/eks/", ipaSound: "/ks/" },
+  { symbol: "Y", ipaName: "/waɪ/", ipaSound: ["/j/", "/aɪ/"] },
   { symbol: "Z", ipaName: "/ziː/", ipaSound: "/z/" },
 ];
 
@@ -82,6 +82,11 @@ async function playLetter(symbol) {
 }
 
 function buildCard({ symbol, ipaName, ipaSound }) {
+  const formatIpa = (value) => {
+    const raw = Array.isArray(value) ? value.join(", ") : String(value ?? "");
+    return `[${raw.replaceAll("/", "")}]`;
+  };
+
   const card = document.createElement("article");
   card.className = "card";
   card.tabIndex = 0;
@@ -110,7 +115,7 @@ function buildCard({ symbol, ipaName, ipaSound }) {
   tag1.className = "ipa-tag";
   tag1.textContent = "名";
   const ipa1 = document.createElement("span");
-  ipa1.textContent = `[${ipaName.replaceAll("/", "")}]`;
+  ipa1.textContent = formatIpa(ipaName);
   line1.append(tag1, ipa1);
 
   const line2 = document.createElement("div");
@@ -119,7 +124,7 @@ function buildCard({ symbol, ipaName, ipaSound }) {
   tag2.className = "ipa-tag";
   tag2.textContent = "音";
   const ipa2 = document.createElement("span");
-  ipa2.textContent = `[${ipaSound.replaceAll("/", "")}]`;
+  ipa2.textContent = formatIpa(ipaSound);
   line2.append(tag2, ipa2);
 
   ipaBlock.append(line1, line2);
