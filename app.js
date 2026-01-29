@@ -77,7 +77,7 @@ async function playLetter(symbol) {
     await player.play();
   } catch {
     setPlayingSymbol(null);
-    showToast("无法播放音频：请在浏览器中打开并允许媒体播放");
+    showToast("无法播放音频：请检查网络是否连接");
   }
 }
 
