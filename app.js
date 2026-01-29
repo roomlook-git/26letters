@@ -62,6 +62,13 @@ async function playLetter(symbol) {
 
   const shouldRestartSame = player.src && currentSymbol === symbol;
 
+  if (shouldRestartSame && !player.paused && !player.ended && player.currentTime > 0) {
+    player.pause();
+    player.currentTime = 0;
+    setPlayingSymbol(null);
+    return;
+  }
+
   if (!shouldRestartSame) {
     player.pause();
     player.currentTime = 0;
