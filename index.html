@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f6f8fb" />
+    <title>26 个英文字母表</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="preload" as="audio" href="./audio/A.mp3" />
+    <link rel="preload" as="audio" href="./audio/B.mp3" />
+    <link rel="preload" as="audio" href="./audio/C.mp3" />
+    <link rel="preload" as="audio" href="./audio/D.mp3" />
+    <link rel="preload" as="audio" href="./audio/E.mp3" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-row">
+        <span class="header-icon" aria-hidden="true">🎙️</span>
+        <h1 class="title">26个英文字母表</h1>
+      </div>
+      <p class="subtitle">点击字母卡片播放发音（字母名 → 自然音）</p>
+    </header>
+
+    <main class="main">
+      <section class="letters" id="letters" aria-label="字母列表"></section>
+    </main>
+
+    <div class="toast" id="toast" aria-live="polite" aria-atomic="true"></div>
+
+    <audio id="player" preload="none"></audio>
+    <script src="./app.js" defer></script>
+  </body>
+</html>
