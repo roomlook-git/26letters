@@ -154,14 +154,19 @@ function buildCard({ symbol, ipaName, ipaSound }) {
 
   card.addEventListener("click", (event) => {
     const target = event.target;
-    if (target instanceof HTMLElement && target.closest("button")) return;
+    if (target instanceof Element && target.closest("button")) return;
     onPlay(event);
   });
 
-  playBtn.addEventListener("click", onPlay);
+  playBtn.addEventListener("click", (event) => {
+    event.stopPropagation();
+    onPlay(event);
+  });
 
   card.addEventListener("keydown", (event) => {
     if (event.key !== "Enter" && event.key !== " ") return;
+    const target = event.target;
+    if (target instanceof Element && target.closest("button")) return;
     onPlay(event);
   });
 
